@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavDiv = styled.div`
+export const NavRoot = styled.div`
   background-color: rgb(18, 131, 218);
   color: white;
   min-height: 60px;

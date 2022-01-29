@@ -1,13 +1,13 @@
 import { Task } from "../../tasks";
 import PriorityBadge from "../Badges/PriorityBadge";
 import StatusBadge from "../Badges/StatusBadge";
-import { TableViewDiv, ScrollingTable } from "./TableView.styles";
+import { TableViewRoot, ScrollingTable, NoWrapCell } from "./TableView.styles";
 
 const TableView = (props: { allTasks: Task[] }) => {
   const { allTasks } = props;
 
   return (
-    <TableViewDiv>
+    <TableViewRoot>
       <ScrollingTable>
         <tr>
           <th>Task Name</th>
@@ -24,19 +24,19 @@ const TableView = (props: { allTasks: Task[] }) => {
             <td>{task.taskName}</td>
             <td>{task.owner}</td>
             <td>{task.description}</td>
-            <td>
+            <NoWrapCell>
               <PriorityBadge priority={task.priority} />
-            </td>
-            <td>
+            </NoWrapCell>
+            <NoWrapCell>
               <StatusBadge status={task.status} />
-            </td>
+            </NoWrapCell>
             <td>${task.budget.toLocaleString()}</td>
             <td>${task.spent.toLocaleString()}</td>
             <td>${task.remainingSpend.toLocaleString()}</td>
           </tr>
         ))}
       </ScrollingTable>
-    </TableViewDiv>
+    </TableViewRoot>
   );
 };
 

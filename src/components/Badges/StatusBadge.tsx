@@ -1,9 +1,9 @@
 import { Status } from "../../tasks";
-import { StatusBadgeDiv } from "./Badges.styles";
+import { StatusBadgeRoot } from "./Badges.styles";
 
 const StatusBadge = (props: { status: Status }) => {
   const { status } = props;
-  return <StatusBadgeDiv status={status}>{status}</StatusBadgeDiv>;
+  return <StatusBadgeRoot status={status}>{status}</StatusBadgeRoot>;
 };
 
 export default StatusBadge;

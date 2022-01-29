@@ -3,9 +3,8 @@ export type Status =
   | "In Progress"
   | "Awaiting Approval"
   | "Abandoned"
-  | "Completed"
-  | string;
-export type Priority = "High" | "Low" | "Critical" | "Medium" | string;
+  | "Completed";
+export type Priority = "High" | "Low" | "Critical" | "Medium";
 
 export interface Task {
   taskName: string;
@@ -13,14 +12,14 @@ export interface Task {
   startDate: string;
   dueDate: string;
   description: string;
-  priority: string;
-  status: string;
+  priority: Priority;
+  status: Status;
   budget: number;
   spent: number;
   remainingSpend: number;
 }
 
-export const taskKeys = [
+export const taskKeys: string[] = [
   "taskName",
   "owner",
   "startDate",
@@ -33,7 +32,7 @@ export const taskKeys = [
   "remainingSpend",
 ];
 
-export const allTasks = [
+export const allTasks: Task[] = [
   {
     taskName: "Tableware Rented",
     owner: "Camila H.",
@@ -68,7 +67,7 @@ export const allTasks = [
     description:
       "Minute-by-minute explanation of what needs to be done and in what order.",
     priority: "High",
-    status: "Awaiting Confirmation / Approval",
+    status: "Awaiting Approval",
     budget: 0,
     spent: 0,
     remainingSpend: 0,
@@ -119,7 +118,7 @@ export const allTasks = [
     description:
       "Energy of the evening needs to be relaxed, mostly instrumental.",
     priority: "Low",
-    status: "Awaiting Confirmation / Approval",
+    status: "Awaiting Approval",
     budget: 0,
     spent: 0,
     remainingSpend: 0,

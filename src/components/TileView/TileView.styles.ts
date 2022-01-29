@@ -1,3 +1,9 @@
 import styled from "styled-components";
 
-export const TileViewDiv = styled.div``;
+export const TileViewRoot = styled.div`
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  grid-gap: 3vw;
+  justify-content: center;
+`;

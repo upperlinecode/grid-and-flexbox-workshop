@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Status, Priority } from "../../tasks";
 
-export const StatusBadgeDiv = styled.span<{ status: Status }>`
+export const StatusBadgeRoot = styled.span<{ status: Status }>`
   color: darkslategrey;
   font-size: 10px;
   padding: 2px 5px;
@@ -25,7 +25,7 @@ export const StatusBadgeDiv = styled.span<{ status: Status }>`
 // | "Abandoned"
 // | "Completed";
 
-export const PriorityBadgeDiv = styled.span<{ priority: Priority }>`
+export const PriorityBadgeRoot = styled.span<{ priority: Priority }>`
   color: darkslategrey;
   font-size: 10px;
   padding: 2px 5px;
