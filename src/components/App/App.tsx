@@ -1,4 +1,4 @@
-import Nav from "../Nav/Nav";
+import NavMenu from "../NavMenu/NavMenu";
 import { useState } from "react";
 import TableView from "../TableView/TableView";
 import TileView from "../TileView/TileView";
@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <AppDiv>
-      <Nav setActive={setActive} />
+      <NavMenu setActive={setActive} />
       <main>
         {active === "table" ? (
           <TableView allTasks={allTasks} />

@@ -6,7 +6,7 @@ function TileView(props: { allTasks: Task[] }) {
   return (
     <TileViewRoot>
       {allTasks.map((taskData) => (
-        <Card task={taskData} full={true} />
+        <Card task={taskData} />
       ))}
     </TileViewRoot>
   );

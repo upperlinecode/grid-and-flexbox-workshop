@@ -1,5 +1,4 @@
 import { Task, Status, allTasks } from "../../tasks";
-import StatusBadge from "../Badges/StatusBadge";
 import Card from "../Card/Card";
 import { KanbanViewRoot, Column } from "./KanbanView.styles";
 
@@ -16,18 +15,10 @@ const KanbanView = (props: { allTasks: Task[] }) => {
 
   return (
     <KanbanViewRoot>
-      {viableStatus.map((status) => (
-        <Column>
-          <span>
-            Status: <StatusBadge status={status} />
-          </span>
-          {allTasks
-            .filter((task) => task.status === status)
-            .map((task: Task) => (
-              <Card task={task} full={false} />
-            ))}
-        </Column>
-      ))}
+      <Column>Column 1</Column>
+      <Column>Column 2</Column>
+      <Column>Column 3</Column>
+      <Column>Column 4</Column>
     </KanbanViewRoot>
   );
 };

@@ -1,41 +1,35 @@
 import { Task } from "../../tasks";
-import PriorityBadge from "../Badges/PriorityBadge";
-import StatusBadge from "../Badges/StatusBadge";
-import { TableViewRoot, ScrollingTable, NoWrapCell } from "./TableView.styles";
+import { TableViewRoot } from "./TableView.styles";
 
 const TableView = (props: { allTasks: Task[] }) => {
   const { allTasks } = props;
 
   return (
     <TableViewRoot>
-      <ScrollingTable>
-        <tr>
-          <th>Task Name</th>
-          <th>Owner</th>
-          <th>Description</th>
-          <th>Priority</th>
-          <th>Status</th>
-          <th>Budget</th>
-          <th>Spent</th>
-          <th>Left</th>
-        </tr>
+      <div className="table">
+        <div className="row">
+          <div className="headerCell">Task Name</div>
+          <div className="headerCell">Owner</div>
+          <div className="headerCell">Description</div>
+          <div className="headerCell">Priority</div>
+          <div className="headerCell">Status</div>
+          <div className="headerCell">Budget</div>
+          <div className="headerCell">Spent</div>
+          <div className="headerCell">Left</div>
+        </div>
         {allTasks.map((task) => (
-          <tr>
-            <td>{task.taskName}</td>
-            <td>{task.owner}</td>
-            <td>{task.description}</td>
-            <NoWrapCell>
-              <PriorityBadge priority={task.priority} />
-            </NoWrapCell>
-            <NoWrapCell>
-              <StatusBadge status={task.status} />
-            </NoWrapCell>
-            <td>${task.budget.toLocaleString()}</td>
-            <td>${task.spent.toLocaleString()}</td>
-            <td>${task.remainingSpend.toLocaleString()}</td>
-          </tr>
+          <div className="row">
+            <div className="cell">{task.taskName}</div>
+            <div className="cell">{task.owner}</div>
+            <div className="cell">{task.description}</div>
+            <div className="cell">{task.priority}</div>
+            <div className="cell">{task.status}</div>
+            <div className="cell">${task.budget.toLocaleString()}</div>
+            <div className="cell">${task.spent.toLocaleString()}</div>
+            <div className="cell">${task.remainingSpend.toLocaleString()}</div>
+          </div>
         ))}
-      </ScrollingTable>
+      </div>
     </TableViewRoot>
   );
 };

@@ -1,8 +1,8 @@
-import { NavRoot, Logo, ButtonCluster, Title } from "./Nav.styles";
+import { NavRoot, Logo, ButtonCluster, Title } from "./NavMenu.styles";
 import { Active } from "../App/App";
 import { SetStateAction, Dispatch } from "react";
 
-const Nav = (props: { setActive: Dispatch<SetStateAction<Active>> }) => {
+const NavMenu = (props: { setActive: Dispatch<SetStateAction<Active>> }) => {
   const { setActive } = props;
   return (
     <NavRoot>
@@ -18,4 +18,4 @@ const Nav = (props: { setActive: Dispatch<SetStateAction<Active>> }) => {
   );
 };
 
-export default Nav;
+export default NavMenu;
