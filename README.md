@@ -1,6 +1,6 @@
 # Grid & Flexbox
 
-## [THEME]
+## Organizing Organizr
 
 ## Objectives
 
