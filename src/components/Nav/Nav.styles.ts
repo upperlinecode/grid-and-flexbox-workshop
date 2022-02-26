@@ -17,7 +17,7 @@ export const Title = styled.h1`
 export const Logo = styled.div`
   font-family: "Rubik Beastly", cursive;
   font-size: 20px;
-  margin-left: 1%;
+  margin-left: 1rem;
 `;
 
 export const ButtonCluster = styled.div`

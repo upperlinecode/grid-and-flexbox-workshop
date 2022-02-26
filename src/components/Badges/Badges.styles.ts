@@ -1,44 +1,32 @@
 import styled from "styled-components";
 import { Status, Priority } from "../../tasks";
 
+const statusColorMappings: { [key: string]: string } = {
+  "Not Started": "rgb(250, 215, 158)",
+  "In Progress": "rgb(132, 156, 194)",
+  Completed: "rgb(198, 250, 208)",
+};
+
 export const StatusBadgeRoot = styled.span<{ status: Status }>`
   color: darkslategrey;
   font-size: 10px;
   padding: 2px 5px;
   border-radius: 15px;
-  background-color: ${({ status }) => {
-    switch (status) {
-      case "Not Started":
-        return "rgb(250, 215, 158)";
-      case "In Progress":
-        return "rgb(132, 156, 194)";
-      case "Completed":
-        return "rgb(198, 250, 208)";
-      default:
-        return "rgb(220, 220, 220)";
-    }
-  }};
+  background-color: ${({ status }) =>
+    statusColorMappings[status] || "rgb(220, 220, 220)"};
 `;
-// | "Not Started"
-// | "In Progress"
-// | "Awaiting Confirmation / Approval"
-// | "Abandoned"
-// | "Completed";
+
+const priorityColorMappings: { [key: string]: string } = {
+  Low: "rgb(207, 223, 255)",
+  Medium: "rgb(198, 250, 208)",
+  High: "rgb(250, 215, 158)",
+};
 
 export const PriorityBadgeRoot = styled.span<{ priority: Priority }>`
   color: darkslategrey;
   font-size: 10px;
   padding: 2px 5px;
   border-radius: 15px;
-  background-color: ${({ priority }) => {
-    if (priority === "Low") {
-      return "rgb(207, 223, 255)";
-    } else if (priority === "Medium") {
-      return "rgb(198, 250, 208)";
-    } else if (priority === "High") {
-      return "rgb(250, 215, 158)";
-    } else {
-      return "rgb(250, 199, 211)";
-    }
-  }};
+  background-color: ${({ priority }) =>
+    priorityColorMappings[priority] || "rgb(250, 199, 211)"};
 `;
