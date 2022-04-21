@@ -13,11 +13,11 @@
 
 ## Why?
 
-Layout is complicated, and the more creative your layouts get, the more thoughtful you have to be about which layout tools are the best suited to handle a given job. For the most part, this lab is an opportunity to think about when to use Grid, when to use Flexbox, when to use nested combinations of both tools, and the importance of not overcomplicating things that can be accomplished through simpler means like an HTML table. 
+Layout is complicated, and the more creative your layouts get, the more thoughtful you have to be about which layout tools are the best suited to handle a given job. For the most part, this lab is an opportunity to think about when to use Grid, when to use Flexbox, when to use nested combinations of both tools, and the importance of not over complicating things that can be accomplished through simpler means like an HTML table. 
 
 ## Setup
 
-This is a standard react project - run `npm run start` or our standard `npm run play` to start the lab.
+This is a standard react project - first run `npm install` and then run `npm run start` or our standard `npm run play` to start the lab.
 
 ## Framing
 
