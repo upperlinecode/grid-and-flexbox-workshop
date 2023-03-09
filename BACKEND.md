@@ -38,3 +38,6 @@ You are apart of a team that has been working on adding in a Kanban board featur
 - [] ★★★ Add in moving (updating) of columns and cards
   - [] A logged in user should be able to move a column (order should be preserved)
   - [] A logged in user should be able to move a card (order should be preserved)
+- [] `STRETCH` Add in editing of cards
+  - [] A logged in user should be able to edit column names
+  - [] A logged in user should be able to edit card names and descriptions
