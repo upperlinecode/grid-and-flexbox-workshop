@@ -1,40 +1,70 @@
 import { Task } from "../../tasks";
 import PriorityBadge from "../Badges/PriorityBadge";
 import StatusBadge from "../Badges/StatusBadge";
-import { BudgetGrid, CardRoot, FieldBody, FieldTitle } from "./Card.styles";
+import Button from "../Button/Button.styles";
+import DirectionalButton from "../DirectionalButton/DirectionalButton";
+import { BudgetGrid, CardHeader, CardRoot, FieldBody, FieldTitle } from "./Card.styles";
 
-const Card = (props: { task: Task; full: boolean }) => {
-  const {
-    taskName,
-    owner,
-    description,
-    priority,
-    status,
-    budget,
-    spent,
-    remainingSpend,
-  } = props.task;
-  const { full } = props;
+interface Props {
+  task: Task;
+  full: boolean;
+  handleDelete?: () => void;
+  handleUp?: () => void;
+  handleDown?: () => void;
+  handleLeft?: () => void;
+  handleRight?: () => void;
+}
+
+const Card = ({
+  task,
+  full,
+  handleDelete,
+  handleUp,
+  handleDown,
+  handleLeft,
+  handleRight,
+}: Props) => {
+  const { taskName, owner, description, priority, status, budget, spent, remainingSpend } = task;
   return (
     <CardRoot>
+      {handleUp && <DirectionalButton direction="up" kind="card" onClick={handleUp} />}
+      {handleLeft && <DirectionalButton direction="left" kind="card" onClick={handleLeft} />}
+      {handleRight && <DirectionalButton direction="right" kind="card" onClick={handleRight} />}
+      {handleDown && <DirectionalButton direction="down" kind="card" onClick={handleDown} />}
+
       <div>
-        <h4>{taskName}</h4>
-        <FieldTitle>Owner</FieldTitle>
-        <FieldBody>{owner}</FieldBody>
+        <CardHeader>
+          {taskName}{" "}
+          {handleDelete && (
+            <Button kind="delete" onClick={handleDelete}>
+              Delete
+            </Button>
+          )}
+        </CardHeader>
+        {owner && (
+          <>
+            <FieldTitle>Owner</FieldTitle>
+            <FieldBody>{owner}</FieldBody>
+          </>
+        )}
+        <FieldTitle>Description</FieldTitle>
+        <FieldBody>{description}</FieldBody>
         {full && (
           <>
-            <FieldTitle>Description</FieldTitle>
-            <FieldBody>{description}</FieldBody>
             <FieldTitle>Status</FieldTitle>
             <FieldBody>
               <StatusBadge status={status} />
             </FieldBody>
           </>
         )}
-        <FieldTitle>Priority</FieldTitle>
-        <FieldBody>
-          <PriorityBadge priority={priority} />
-        </FieldBody>
+        {priority && (
+          <>
+            <FieldTitle>Priority</FieldTitle>
+            <FieldBody>
+              <PriorityBadge priority={priority} />
+            </FieldBody>
+          </>
+        )}
       </div>
       {full && (
         <BudgetGrid>

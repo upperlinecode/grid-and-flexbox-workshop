@@ -5,28 +5,40 @@ import TileView from "../TileView/TileView";
 import KanbanView from "../KanbanView/KanbanView";
 import { AppDiv } from "./App.styles";
 import { allTasks } from "../../tasks";
+import { AuthProvider } from "../../context/authContext";
+import UserHeader from "../UserHeader/UserHeader";
+import { KanbanProvider } from "../../context/kanbanContext";
+import { GlobalStyle } from "../../utils/GlobalStyle";
 
 export type Active = "table" | "kanban" | "tiled" | "gantt";
 
 const App = () => {
   const [active, setActive] = useState<Active>("table");
-  console.log(allTasks);
 
   return (
-    <AppDiv>
-      <Nav setActive={setActive} />
-      <main>
-        {active === "table" ? (
-          <TableView allTasks={allTasks} />
-        ) : active === "tiled" ? (
-          <TileView allTasks={allTasks} />
-        ) : active === "kanban" ? (
-          <KanbanView allTasks={allTasks} />
-        ) : (
-          "Gantt under construction"
-        )}
-      </main>
-    </AppDiv>
+    <AuthProvider>
+      <KanbanProvider>
+        <GlobalStyle />
+
+        <AppDiv>
+          <Nav setActive={setActive} />
+          <main>
+            {active === "table" ? (
+              <TableView allTasks={allTasks} />
+            ) : active === "tiled" ? (
+              <TileView allTasks={allTasks} />
+            ) : active === "kanban" ? (
+              <>
+                <UserHeader />
+                <KanbanView allTasks={allTasks} />
+              </>
+            ) : (
+              "Gantt under construction"
+            )}
+          </main>
+        </AppDiv>
+      </KanbanProvider>
+    </AuthProvider>
   );
 };
 

@@ -3,7 +3,8 @@ export type Status =
   | "In Progress"
   | "Awaiting Approval"
   | "Abandoned"
-  | "Completed";
+  | "Completed"
+  | string;
 export type Priority = "High" | "Low" | "Critical" | "Medium";
 
 export interface Task {
@@ -64,8 +65,7 @@ export const allTasks: Task[] = [
     owner: "Neda B.",
     startDate: "2022-01-21T05:00:00.000Z",
     dueDate: "2022-05-31T04:00:00.000Z",
-    description:
-      "Minute-by-minute explanation of what needs to be done and in what order.",
+    description: "Minute-by-minute explanation of what needs to be done and in what order.",
     priority: "High",
     status: "Awaiting Approval",
     budget: 0,
@@ -115,8 +115,7 @@ export const allTasks: Task[] = [
     owner: "Anthony D.",
     startDate: "2022-01-21T05:00:00.000Z",
     dueDate: "2022-05-12T04:00:00.000Z",
-    description:
-      "Energy of the evening needs to be relaxed, mostly instrumental.",
+    description: "Energy of the evening needs to be relaxed, mostly instrumental.",
     priority: "Low",
     status: "Awaiting Approval",
     budget: 0,
@@ -140,8 +139,7 @@ export const allTasks: Task[] = [
     owner: "Rashawn W.",
     startDate: "2022-01-21T05:00:00.000Z",
     dueDate: "2022-04-15T04:00:00.000Z",
-    description:
-      "We need at least one vegetarian and one gluten and dairy free option please",
+    description: "We need at least one vegetarian and one gluten and dairy free option please",
     priority: "Critical",
     status: "In Progress",
     budget: 10000,

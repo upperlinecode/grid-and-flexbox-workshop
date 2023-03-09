@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const CardHeader = styled.h4`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const CardRoot = styled.div`
   background-color: aliceblue;
   width: 250px;
@@ -10,6 +15,7 @@ export const CardRoot = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   h4 {
     margin-top: 0px;
