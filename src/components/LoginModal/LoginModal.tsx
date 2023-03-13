@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../context/authContext";
 import Button from "../Button/Button.styles";
 import { Form } from "../Form/Form.styles";
 import Modal from "../Modal/Modal";
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const LoginModal = ({ handleClose, isOpen }: Props) => {
-  const { login } = useAuth();
   const {
     register,
     handleSubmit,
@@ -26,13 +24,7 @@ const LoginModal = ({ handleClose, isOpen }: Props) => {
     setFailedLogin(false);
   };
   const onSubmit = (data: any) => {
-    login(data).then((user) => {
-      if (user) {
-        close();
-      } else {
-        setFailedLogin(true);
-      }
-    });
+    console.log("TODO: LOGIN API CALL");
   };
 
   return (

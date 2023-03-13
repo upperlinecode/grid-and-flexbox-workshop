@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useAuth } from "../../context/authContext";
+import { User } from "../../utils/apiTypes";
 import Button from "../Button/Button.styles";
 import LoginModal from "../LoginModal/LoginModal";
 import SignUpModal from "../SignUpModal/SignUpModal";
 import { AuthHeading, Header, Heading } from "./UserHeader.styles";
 
 const UserHeader = () => {
-  const { user, logout } = useAuth();
+  const user = null as User | null;
+  const logout = () => console.log("TODO: REPLACE WITH LOGOUT API");
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
@@ -15,7 +16,7 @@ const UserHeader = () => {
       <Header>
         {user ? (
           <Heading>
-            Welcome {user.firstName} <Button onClick={logout}>Log Out</Button>
+            Welcome {user?.firstName} <Button onClick={logout}>Log Out</Button>
           </Heading>
         ) : (
           <AuthHeading>

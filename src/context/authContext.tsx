@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { login as loginApi, signUp as signUpApi } from "../utils/api";
-import { LoginBody, SignUpBody } from "../utils/apiTypes";
+import { LoginBody, SignUpBody, User } from "../utils/apiTypes";
 import {
   clearAccessToken,
   getAccessToken,
@@ -9,15 +9,6 @@ import {
   setAccessToken,
 } from "../utils/accessTokenStorage";
 import { noop } from "../utils/noop";
-
-export interface User {
-  email: string;
-  exp: number;
-  firstName: string;
-  iat: number;
-  id: string;
-  lastName: string;
-}
 
 export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
 

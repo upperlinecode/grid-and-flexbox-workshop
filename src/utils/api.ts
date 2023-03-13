@@ -7,11 +7,15 @@ import {
   CreateCardBody,
   CreateColumnBody,
   LoginBody,
+  LoginResponse,
   SignUpBody,
+  SignUpResponse,
   UpdateBoardBody,
   UpdateCardBody,
   UpdateColumnBody,
 } from "./apiTypes";
+
+export const DEFAULT_BOARD_ID = 1;
 
 const BASE_URL = "http://localhost:4000";
 const AUTH_URL = `${BASE_URL}/auth`;
@@ -33,137 +37,54 @@ const getAuthorizationHeader = (): { Authorization?: string } => {
   };
 };
 
-export const login = (body: LoginBody): Promise<{ access_token: string }> =>
-  fetch(`${AUTH_URL}/login`, {
-    method: POST,
-    headers: {
-      ...BASE_HEADERS,
-    },
-    body: JSON.stringify(body),
-  }).then((res) => res.json());
+export const login = async (body: LoginBody): Promise<LoginResponse> => {};
 
-export const signUp = (body: SignUpBody): Promise<{ isSuccess: boolean }> =>
-  fetch(`${AUTH_URL}/signup`, {
-    method: POST,
-    headers: {
-      ...BASE_HEADERS,
-    },
-    body: JSON.stringify(body),
-  }).then((res) => res.json());
+export const signUp = async (body: SignUpBody): Promise<SignUpResponse> => {};
 
-export const getBoards = (): Promise<Board[]> =>
-  fetch(`${BOARDS_URL}`, {
-    method: GET,
-    headers: {
-      ...BASE_HEADERS,
-    },
-  }).then((res) => res.json());
+export const getBoards = async (): Promise<Board[]> => {
+  return [];
+};
 
-export const createBoard = (body: CreateBoardBody): Promise<Board> =>
-  fetch(`${BOARDS_URL}`, {
-    method: POST,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-    body: JSON.stringify(body),
-  }).then((res) => res.json());
+export const createBoard = async (body: CreateBoardBody): Promise<Board> => {};
 
-export const patchBoard = ({ id, board }: { id: number; board: UpdateBoardBody }): Promise<Board> =>
-  fetch(`${BOARDS_URL}/${id}`, {
-    method: PATCH,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-    body: JSON.stringify(board),
-  }).then((res) => res.json());
+export const patchBoard = async ({
+  id,
+  board,
+}: {
+  id: number;
+  board: UpdateBoardBody;
+}): Promise<Board> => {};
 
-export const deleteBoard = (id: number): Promise<Board> =>
-  fetch(`${BOARDS_URL}/${id}`, {
-    method: DELETE,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-  }).then((res) => res.json());
+export const deleteBoard = async (id: number): Promise<Board> => {};
 
-export const getColumns = (boardId: number): Promise<Column[]> =>
-  fetch(`${COLUMNS_URL}?boardId=${boardId}`, {
-    method: GET,
-    headers: {
-      ...BASE_HEADERS,
-    },
-  }).then((res) => res.json());
+export const getColumns = async (boardId: number): Promise<Column[]> => {
+  return [];
+};
 
-export const createColumn = (body: CreateColumnBody) =>
-  fetch(`${COLUMNS_URL}`, {
-    method: POST,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-    body: JSON.stringify(body),
-  }).then((res) => res.json());
+export const createColumn = async (body: CreateColumnBody): Promise<Column> => {};
 
-export const patchColumn = ({
+export const patchColumn = async ({
   id,
   data,
 }: {
   id: number;
   data: UpdateColumnBody;
-}): Promise<Column> =>
-  fetch(`${COLUMNS_URL}/${id}`, {
-    method: PATCH,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+}): Promise<Column> => {};
 
-export const deleteColumn = (id: number): Promise<Column> =>
-  fetch(`${COLUMNS_URL}/${id}`, {
-    method: DELETE,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-  }).then((res) => res.json());
+export const deleteColumn = async (id: number): Promise<Column> => {};
 
-export const getCards = (columnId: number): Promise<Card[]> =>
-  fetch(`${CARDS_URL}?columnId=${columnId}`, {
-    method: GET,
-    headers: {
-      ...BASE_HEADERS,
-    },
-  }).then((res) => res.json());
+export const getCards = async (columnId: number): Promise<Card[]> => {
+  return [];
+};
 
-export const createCard = (body: CreateCardBody): Promise<Card> =>
-  fetch(`${CARDS_URL}`, {
-    method: POST,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-    body: JSON.stringify(body),
-  }).then((res) => res.json());
+export const createCard = async (body: CreateCardBody): Promise<Card> => {};
 
-export const patchCard = ({ id, data }: { id: number; data: UpdateCardBody }): Promise<Card> =>
-  fetch(`${CARDS_URL}/${id}`, {
-    method: PATCH,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+export const patchCard = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: UpdateCardBody;
+}): Promise<Card> => {};
 
-export const deleteCard = (id: number): Promise<Card> =>
-  fetch(`${CARDS_URL}/${id}`, {
-    method: DELETE,
-    headers: {
-      ...BASE_HEADERS,
-      ...getAuthorizationHeader(),
-    },
-  }).then((res) => res.json());
+export const deleteCard = async (id: number): Promise<Card> => {};

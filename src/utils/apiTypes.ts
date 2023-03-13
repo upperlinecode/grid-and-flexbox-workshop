@@ -1,57 +1,27 @@
-export interface LoginBody {
-  username: string;
-  password: string;
-}
+export type LoginBody = any;
 
-export interface SignUpBody {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-}
+export type LoginResponse = any;
 
-export interface CreateBoardBody {
-  title: string;
-}
+export type SignUpBody = any;
 
-export interface UpdateBoardBody extends Partial<CreateBoardBody> {}
+export type SignUpResponse = any;
 
-export interface CreateColumnBody {
-  title: string;
-  boardId: number;
-}
+export type CreateBoardBody = any;
 
-export interface UpdateColumnBody extends Partial<CreateColumnBody> {
-  previousColumnId?: number | null;
-  nextColumnId?: number | null;
-}
+export type UpdateBoardBody = any;
 
-export interface CreateCardBody {
-  title: string;
-  description?: string;
-  columnId: number;
-}
+export type CreateColumnBody = any;
 
-export interface UpdateCardBody extends Partial<CreateCardBody> {
-  previousCardId?: number | null;
-  nextCardId?: number | null;
-}
+export type UpdateColumnBody = any;
 
-export interface Card {
-  id: number;
-  title: string;
-  description: string | null;
-  columnId: number;
-}
+export type CreateCardBody = any;
 
-export interface Column {
-  id: number;
-  title: string;
-  boardId: number;
-}
+export type UpdateCardBody = any;
 
-export interface Board {
-  id: number;
-  title: string;
-}
+export type User = any;
+
+export type Card = any;
+
+export type Column = any;
+
+export type Board = any;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../context/authContext";
 import Button from "../Button/Button.styles";
 import { Form } from "../Form/Form.styles";
 import Modal from "../Modal/Modal";
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const SignUpModal = ({ handleClose, isOpen }: Props) => {
-  const { signUp } = useAuth();
   const {
     register,
     handleSubmit,
@@ -27,13 +25,7 @@ const SignUpModal = ({ handleClose, isOpen }: Props) => {
     setHasFailedSubmit(false);
   };
   const onSubmit = (data: any) => {
-    signUp(data).then((res: any) => {
-      if (res && res.isSuccess) {
-        close();
-      } else {
-        setHasFailedSubmit(true);
-      }
-    });
+    console.log("TODO: SIGNUP API CALL");
   };
 
   return (

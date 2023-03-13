@@ -1,12 +1,9 @@
 import React from "react";
-import { Column } from "../../utils/apiTypes";
+import { Card as CardType, Column } from "../../utils/apiTypes";
 import { ColumnHeader, ColumnRoot } from "./KanbanColumn.styles";
 import Card from "../Card/Card";
 import Button from "../Button/Button.styles";
 import DirectionalButton from "../DirectionalButton/DirectionalButton";
-import { useAuth } from "../../context/authContext";
-import { useColumnDelete } from "../../react-query/useColumns";
-import { useCardDelete, useCards, useCardUpdate } from "../../react-query/useCards";
 
 interface Props {
   column: Column;
@@ -25,15 +22,14 @@ export default function KanbanColumn({
   handleMoveRight,
   handleCreateCard,
 }: Props) {
-  const { isLoggedIn } = useAuth();
-  const { data } = useCards(column.id);
-  const { data: previousCardData } = useCards(previousColumnId ?? undefined);
-  const { data: nextCardData } = useCards(nextColumnId ?? undefined);
-  const deleteColumnMutation = useColumnDelete();
-  const deleteCardMutation = useCardDelete();
-  const updateCardMutation = useCardUpdate();
+  const isLoggedIn = false; // TODO: REPLACE WITH AUTH CONTEXT
+  const cards: CardType[] | undefined = [];
+  const previousColumnCards: CardType[] | undefined = [];
+  const nextColumnCards: CardType[] | undefined = [];
 
-  const handleColumnDelete = () => deleteColumnMutation.mutate(column.id);
+  const handleColumnDelete = () => {
+    console.log("TODO: DELETE COLUMN API CALL");
+  };
 
   return (
     <ColumnRoot>
@@ -61,74 +57,37 @@ export default function KanbanColumn({
         <DirectionalButton direction="right" kind="column" onClick={handleMoveRight} />
       )}
 
-      {data &&
-        data.map((card, cardIndex) => {
-          const previousCardId = data[cardIndex - 1]?.id || null;
-          const previousPreviousCardId = data[cardIndex - 2]?.id || null;
-          const nextCardId = data[cardIndex + 1]?.id || null;
-          const nextNextCardId = data[cardIndex + 2]?.id || null;
+      {cards &&
+        cards.map((card, cardIndex) => {
+          const previousCardId = cards[cardIndex - 1]?.id || null;
+          const previousPreviousCardId = cards[cardIndex - 2]?.id || null;
+          const nextCardId = cards[cardIndex + 1]?.id || null;
+          const nextNextCardId = cards[cardIndex + 2]?.id || null;
           const handleCardDelete = () => {
-            console.log("TODO");
-            deleteCardMutation.mutate(card.id);
+            console.log("TODO: DELETE CARD API CALL");
           };
           const handleCardUp =
             typeof previousCardId === "number"
               ? () => {
-                  console.log("TODO");
-                  updateCardMutation.mutate({
-                    id: card.id,
-                    data: {
-                      columnId: card.columnId,
-                      previousCardId: previousPreviousCardId,
-                      nextCardId: previousCardId,
-                    },
-                    currentColumnId: card.columnId,
-                  });
+                  console.log("TODO: UPDATE CARD API CALL");
                 }
               : undefined;
           const handleCardDown =
             typeof nextCardId === "number"
               ? () => {
-                  console.log("TODO");
-                  updateCardMutation.mutate({
-                    id: card.id,
-                    data: {
-                      columnId: card.columnId,
-                      previousCardId: nextCardId,
-                      nextCardId: nextNextCardId,
-                    },
-                    currentColumnId: card.columnId,
-                  });
+                  console.log("TODO: UPDATE CARD API CALL");
                 }
               : undefined;
           const handleCardLeft =
-            previousColumnId && previousCardData
+            previousColumnId && previousColumnCards
               ? () => {
-                  console.log("TODO");
-                  updateCardMutation.mutate({
-                    id: card.id,
-                    data: {
-                      columnId: previousColumnId,
-                      previousCardId: previousCardData[previousCardData.length - 1]?.id ?? null,
-                      nextCardId: null,
-                    },
-                    currentColumnId: card.columnId,
-                  });
+                  console.log("TODO: UPDATE CARD API CALL");
                 }
               : undefined;
           const handleCardRight =
-            nextColumnId && nextCardData
+            nextColumnId && nextColumnCards
               ? () => {
-                  console.log("TODO");
-                  updateCardMutation.mutate({
-                    id: card.id,
-                    data: {
-                      columnId: nextColumnId,
-                      previousCardId: nextCardData[nextCardData.length - 1]?.id ?? null,
-                      nextCardId: null,
-                    },
-                    currentColumnId: card.columnId,
-                  });
+                  console.log("TODO: UPDATE CARD API CALL");
                 }
               : undefined;
 
