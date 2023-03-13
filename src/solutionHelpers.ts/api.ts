@@ -1,4 +1,4 @@
-import { getAccessToken } from "./accessTokenStorage";
+import { getAccessToken } from "../utils/accessTokenStorage";
 import {
   Board,
   Card,
@@ -11,7 +11,7 @@ import {
   UpdateBoardBody,
   UpdateCardBody,
   UpdateColumnBody,
-} from "./apiTypes";
+} from "../utils/apiTypes";
 
 const BASE_URL = "http://localhost:4000";
 const AUTH_URL = `${BASE_URL}/auth`;
@@ -26,7 +26,7 @@ const POST = "POST";
 const PATCH = "PATCH";
 const DELETE = "DELETE";
 
-const getAuthorizationHeader = (): { Authorization?: string } => {
+const getAuthorizationHeader = () => {
   const accessToken = getAccessToken();
   return {
     ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : null),

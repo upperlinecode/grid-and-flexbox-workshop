@@ -2,6 +2,7 @@ import react from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/authContext";
 import { useKanban } from "../../context/kanbanContext";
+import { useCardCreate } from "../../react-query/useCards";
 import Button from "../Button/Button.styles";
 import { Form } from "../Form/Form.styles";
 import Modal from "../Modal/Modal";
@@ -13,7 +14,10 @@ interface Props {
 }
 
 const CreateCardModal = ({ handleClose, isOpen, columnId }: Props) => {
+  // context
   const { createCard } = useKanban();
+  // react-query
+  const createCardMutation = useCardCreate();
   const {
     register,
     handleSubmit,
@@ -24,8 +28,14 @@ const CreateCardModal = ({ handleClose, isOpen, columnId }: Props) => {
     reset();
     handleClose();
   };
-  const onSubmit = (data: any) => {
-    createCard({ ...data, columnId }).then(onClose);
+  const onSubmit = async ({ title, description }: { title?: string; description?: string }) => {
+    if (!title || !columnId) {
+      throw new Error("Required fields missing");
+    }
+    const body = { title, description, columnId };
+    // await createCard(body);
+    await createCardMutation.mutateAsync(body);
+    onClose();
   };
 
   return (

@@ -19,7 +19,7 @@ const TableView = (props: { allTasks: Task[] }) => {
           <th>Spent</th>
           <th>Left</th>
         </tr>
-        {allTasks.map((task) => (
+        {/* {allTasks.map((task) => (
           <tr>
             <td>{task.taskName}</td>
             <td>{task.owner}</td>
@@ -34,7 +34,7 @@ const TableView = (props: { allTasks: Task[] }) => {
             <td>${task.spent.toLocaleString()}</td>
             <td>${task.remainingSpend.toLocaleString()}</td>
           </tr>
-        ))}
+        ))} */}
       </ScrollingTable>
     </TableViewRoot>
   );

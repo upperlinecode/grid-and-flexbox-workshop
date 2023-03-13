@@ -4,6 +4,8 @@ import { CreateCardBody, CreateColumnBody } from "../utils/apiTypes";
 import produce from "immer";
 import { noop } from "../utils/noop";
 
+const BOARD_TITLE = "GM Tasks";
+
 interface Card {
   id: number;
   title: string;
@@ -196,15 +198,13 @@ function KanbanProvider(props: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, null);
   useEffect(() => {
     api.getBoards().then(async (boards) => {
-      let board = boards.find((b: any) => b.id === 7);
+      let board = boards.find((b) => b.title === BOARD_TITLE);
       if (!board) {
-        board = await api.createBoard({ title: "Tasks" });
+        board = await api.createBoard({ title: BOARD_TITLE });
       }
       const columns = await api.getColumns(board.id);
-      const cardsByColumn = await Promise.all(
-        columns.map((column: any) => api.getCards(column.id))
-      );
-      const columnsWithCards = columns.map((column: any, index: number) => ({
+      const cardsByColumn = await Promise.all(columns.map((column) => api.getCards(column.id)));
+      const columnsWithCards = columns.map((column, index: number) => ({
         ...column,
         cards: cardsByColumn[index],
       }));
@@ -261,7 +261,7 @@ function KanbanProvider(props: { children: React.ReactNode }) {
     previousColumnId: number | null,
     nextColumnId: number | null
   ) => {
-    await api.patchColumn(columnId, { previousColumnId, nextColumnId });
+    await api.patchColumn({ id: columnId, data: { previousColumnId, nextColumnId } });
     dispatch({ type: "MOVE_COLUMN", payload: { columnId, previousColumnId, nextColumnId } });
   };
 
@@ -271,7 +271,7 @@ function KanbanProvider(props: { children: React.ReactNode }) {
     previousCardId: number | null,
     nextCardId: number | null
   ) => {
-    await api.patchCard(cardId, { columnId, previousCardId, nextCardId });
+    await api.patchCard({ id: cardId, data: { columnId, previousCardId, nextCardId } });
     dispatch({
       type: "MOVE_CARD",
       payload: { columnId, cardId, previousCardId, nextCardId },

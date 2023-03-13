@@ -31,7 +31,7 @@ const defaultContext = {
 const AuthContext = createContext<{
   user: null | User;
   login: (credentials: LoginBody) => Promise<User | null>;
-  signUp: (user: SignUpBody) => Promise<void>;
+  signUp: (user: SignUpBody) => Promise<{ isSuccess: boolean }>;
   logout: () => void;
   isLoggedIn: boolean;
 }>(defaultContext);

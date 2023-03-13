@@ -9,17 +9,33 @@ import Button from "../Button/Button.styles";
 import DirectionalButton from "../DirectionalButton/DirectionalButton";
 import { KanbanViewRoot, Column, ColumnHeader, CreateRow } from "./KanbanView.styles";
 import { useAuth } from "../../context/authContext";
+import useBoard from "../../react-query/useBoards";
+import { useColumns, useColumnUpdate } from "../../react-query/useColumns";
+import KanbanColumn from "../KanbanColumn/KanbanColumn";
+import { useCardUpdate } from "../../react-query/useCards";
+import { UpdateCardBody } from "../../utils/apiTypes";
 
-const KanbanView = (props: { allTasks: Task[] }) => {
+const KanbanView = () => {
   const [isCreateColumnOpen, setIsCreateColumnOpen] = useState(false);
   const [createCardColumnId, setCreateCardColumnId] = useState<number | null>(null);
-  const { kanbanState, deleteCard, deleteColumn, moveCard, moveColumn } = useKanban();
+
   const { isLoggedIn } = useAuth();
-  const columns = kanbanState?.columns || [];
-  // Let's assume Status isn't user-defined, but rather platform universal
-  // We'll make columns for "Not Started", "In Progress", "Awaiting Approval", and "Completed";
-  // We'll skip over "Abandoned" as it's not likely to be useful to display here.
-  const viableStatus: Status[] = ["Not Started", "In Progress", "Awaiting Approval", "Completed"];
+  // Context
+  const { kanbanState, deleteCard, deleteColumn, moveCard, moveColumn } = useKanban();
+  // react-query
+  const { data, isFetched } = useBoard();
+  const { data: columnData, isFetched: isColumnFetched } = useColumns(data?.id);
+  const columnUpdateMutation = useColumnUpdate();
+  // const cardQuery = useCards(columnQuery.data?.[0]?.id);
+
+  if (!isFetched || !isColumnFetched) {
+    return null;
+  }
+
+  // Context
+  // const columns = kanbanState?.columns || [];
+  // react-query
+  const columns = columnData || [];
 
   return (
     <>
@@ -34,6 +50,7 @@ const KanbanView = (props: { allTasks: Task[] }) => {
       <CreateColumnModal
         isOpen={isCreateColumnOpen}
         handleClose={() => setIsCreateColumnOpen(false)}
+        boardId={data?.id}
       />
 
       <CreateCardModal
@@ -44,6 +61,51 @@ const KanbanView = (props: { allTasks: Task[] }) => {
 
       <KanbanViewRoot>
         {columns.map((column, columnIndex) => {
+          const previousColumnId = columns[columnIndex - 1]?.id || null;
+          const previousPreviousColumnId = columns[columnIndex - 2]?.id || null;
+          const nextColumnId = columns[columnIndex + 1]?.id || null;
+          const nextNextColumnId = columns[columnIndex + 2]?.id || null;
+
+          const handleMoveLeft =
+            typeof previousColumnId === "number"
+              ? () => {
+                  columnUpdateMutation.mutate({
+                    id: column.id,
+                    data: {
+                      previousColumnId: previousPreviousColumnId,
+                      nextColumnId: previousColumnId,
+                    },
+                  });
+                }
+              : undefined;
+          const handleMoveRight =
+            typeof nextColumnId === "number"
+              ? () => {
+                  columnUpdateMutation.mutate({
+                    id: column.id,
+                    data: {
+                      previousColumnId: nextColumnId,
+                      nextColumnId: nextNextColumnId,
+                    },
+                  });
+                }
+              : undefined;
+
+          return (
+            <KanbanColumn
+              column={column}
+              previousColumnId={previousColumnId}
+              nextColumnId={nextColumnId}
+              handleMoveLeft={handleMoveLeft}
+              handleMoveRight={handleMoveRight}
+              handleCreateCard={() => setCreateCardColumnId(column.id)}
+            />
+          );
+        })}
+      </KanbanViewRoot>
+
+      {/* <KanbanViewRoot>
+        {columns.map((column, columnIndex) => {
           const previousColumn = columns[columnIndex - 1];
           const previousPreviousColumn = columns[columnIndex - 2];
           const nextColumn = columns[columnIndex + 1];
@@ -52,7 +114,6 @@ const KanbanView = (props: { allTasks: Task[] }) => {
           return (
             <Column key={column.id}>
               <ColumnHeader>
-                {/* Status: <StatusBadge status={column.title} /> */}
                 {column.title}
 
                 {isLoggedIn && (
@@ -86,6 +147,7 @@ const KanbanView = (props: { allTasks: Task[] }) => {
                   }}
                 />
               )}
+
               {column.cards.map((card, cardIndex) => {
                 const previousCard = column.cards[cardIndex - 1];
                 const previousPreviousCard = column.cards[cardIndex - 2];
@@ -95,7 +157,7 @@ const KanbanView = (props: { allTasks: Task[] }) => {
                 return (
                   <Card
                     key={card.id}
-                    task={{ taskName: card.title, description: card.description } as any}
+                    task={{ id: card.id, taskName: card.title, description: card.description }}
                     handleDelete={isLoggedIn ? () => deleteCard(column.id, card.id) : undefined}
                     handleLeft={
                       isLoggedIn && previousColumn
@@ -144,19 +206,7 @@ const KanbanView = (props: { allTasks: Task[] }) => {
             </Column>
           );
         })}
-        {/* {viableStatus.map((status) => (
-          <Column>
-            <span>
-              Status: <StatusBadge status={status} />
-            </span>
-            {allTasks
-              .filter((task) => task.status === status)
-              .map((task: Task) => (
-                <Card task={task} full={false} />
-              ))}
-          </Column>
-        ))} */}
-      </KanbanViewRoot>
+      </KanbanViewRoot> */}
     </>
   );
 };

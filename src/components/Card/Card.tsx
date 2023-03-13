@@ -1,3 +1,4 @@
+import { useCardDelete } from "../../react-query/useCards";
 import { Task } from "../../tasks";
 import PriorityBadge from "../Badges/PriorityBadge";
 import StatusBadge from "../Badges/StatusBadge";
@@ -24,7 +25,9 @@ const Card = ({
   handleLeft,
   handleRight,
 }: Props) => {
-  const { taskName, owner, description, priority, status, budget, spent, remainingSpend } = task;
+  const { id, taskName, owner, description, priority, status, budget, spent, remainingSpend } =
+    task;
+
   return (
     <CardRoot>
       {handleUp && <DirectionalButton direction="up" kind="card" onClick={handleUp} />}
@@ -49,7 +52,7 @@ const Card = ({
         )}
         <FieldTitle>Description</FieldTitle>
         <FieldBody>{description}</FieldBody>
-        {full && (
+        {full && status && (
           <>
             <FieldTitle>Status</FieldTitle>
             <FieldBody>
@@ -71,9 +74,9 @@ const Card = ({
           <FieldTitle>Budget</FieldTitle>
           <FieldTitle>Spent</FieldTitle>
           <FieldTitle>Remaining</FieldTitle>
-          <FieldBody>${budget.toLocaleString()}</FieldBody>
-          <FieldBody>${spent.toLocaleString()}</FieldBody>
-          <FieldBody>${remainingSpend.toLocaleString()}</FieldBody>
+          <FieldBody>${budget?.toLocaleString()}</FieldBody>
+          <FieldBody>${spent?.toLocaleString()}</FieldBody>
+          <FieldBody>${remainingSpend?.toLocaleString()}</FieldBody>
         </BudgetGrid>
       )}
     </CardRoot>

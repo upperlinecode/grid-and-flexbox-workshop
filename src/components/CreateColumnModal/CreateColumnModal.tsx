@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/authContext";
 import { useKanban } from "../../context/kanbanContext";
+import { useColumnCreate } from "../../react-query/useColumns";
 import Button from "../Button/Button.styles";
 import { Form } from "../Form/Form.styles";
 import Modal from "../Modal/Modal";
@@ -9,10 +10,12 @@ import Modal from "../Modal/Modal";
 interface Props {
   isOpen?: boolean;
   handleClose: () => void;
+  boardId?: number;
 }
 
-const CreateColumnModal = ({ handleClose, isOpen }: Props) => {
+const CreateColumnModal = ({ handleClose, isOpen, boardId }: Props) => {
   const { createColumn } = useKanban();
+  const createColumnMutation = useColumnCreate();
   const {
     register,
     handleSubmit,
@@ -23,8 +26,14 @@ const CreateColumnModal = ({ handleClose, isOpen }: Props) => {
     reset();
     handleClose();
   };
-  const onSubmit = (data: any) => {
-    createColumn(data).then(onClose);
+  const onSubmit = async ({ title }: { title?: string }) => {
+    // createColumn(data).then(onClose);
+    if (!boardId || !title) {
+      return;
+    }
+
+    await createColumnMutation.mutate({ title, boardId });
+    onClose();
   };
 
   return (

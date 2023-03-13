@@ -37,3 +37,21 @@ export interface UpdateCardBody extends Partial<CreateCardBody> {
   previousCardId?: number | null;
   nextCardId?: number | null;
 }
+
+export interface Card {
+  id: number;
+  title: string;
+  description: string | null;
+  columnId: number;
+}
+
+export interface Column {
+  id: number;
+  title: string;
+  boardId: number;
+}
+
+export interface Board {
+  id: number;
+  title: string;
+}

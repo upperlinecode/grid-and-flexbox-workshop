@@ -8,16 +8,17 @@ export type Status =
 export type Priority = "High" | "Low" | "Critical" | "Medium";
 
 export interface Task {
+  id: number;
   taskName: string;
-  owner: string;
-  startDate: string;
-  dueDate: string;
-  description: string;
-  priority: Priority;
-  status: Status;
-  budget: number;
-  spent: number;
-  remainingSpend: number;
+  owner?: string;
+  startDate?: string;
+  dueDate?: string;
+  description?: string | null;
+  priority?: Priority;
+  status?: Status;
+  budget?: number;
+  spent?: number;
+  remainingSpend?: number;
 }
 
 export const taskKeys: string[] = [
@@ -35,6 +36,7 @@ export const taskKeys: string[] = [
 
 export const allTasks: Task[] = [
   {
+    id: 1,
     taskName: "Tableware Rented",
     owner: "Camila H.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -48,6 +50,7 @@ export const allTasks: Task[] = [
     remainingSpend: 800,
   },
   {
+    id: 2,
     taskName: "Book Venue",
     owner: "Rashawn W.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -61,6 +64,7 @@ export const allTasks: Task[] = [
     remainingSpend: 11500,
   },
   {
+    id: 3,
     taskName: "Run of Show",
     owner: "Neda B.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -73,6 +77,7 @@ export const allTasks: Task[] = [
     remainingSpend: 0,
   },
   {
+    id: 4,
     taskName: "Celebrity Guest Confirmed",
     owner: "Anthony D.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -86,6 +91,7 @@ export const allTasks: Task[] = [
     remainingSpend: 500,
   },
   {
+    id: 5,
     taskName: "Invitations Sent",
     owner: "Heather L.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -98,6 +104,7 @@ export const allTasks: Task[] = [
     remainingSpend: 20,
   },
   {
+    id: 6,
     taskName: "Wifi Tested",
     owner: "Camila H.",
     startDate: "2022-05-30T04:00:00.000Z",
@@ -111,6 +118,7 @@ export const allTasks: Task[] = [
     remainingSpend: 0,
   },
   {
+    id: 7,
     taskName: "Playlist Made",
     owner: "Anthony D.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -123,6 +131,7 @@ export const allTasks: Task[] = [
     remainingSpend: 0,
   },
   {
+    id: 8,
     taskName: "Centerpieces",
     owner: "Neda B.",
     startDate: "2022-02-01T05:00:00.000Z",
@@ -135,6 +144,7 @@ export const allTasks: Task[] = [
     remainingSpend: -600,
   },
   {
+    id: 9,
     taskName: "Caterer Finalized",
     owner: "Rashawn W.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -147,6 +157,7 @@ export const allTasks: Task[] = [
     remainingSpend: 6000,
   },
   {
+    id: 10,
     taskName: "Valet Run of Show",
     owner: "Chris O.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -160,6 +171,7 @@ export const allTasks: Task[] = [
     remainingSpend: 0,
   },
   {
+    id: 11,
     taskName: "Speaker Vetted",
     owner: "Evelyn M.",
     startDate: "2022-05-01T04:00:00.000Z",
@@ -173,6 +185,7 @@ export const allTasks: Task[] = [
     remainingSpend: 0,
   },
   {
+    id: 12,
     taskName: "Guest Gifts",
     owner: "Anthony D.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -186,6 +199,7 @@ export const allTasks: Task[] = [
     remainingSpend: 0,
   },
   {
+    id: 13,
     taskName: "Speaker Gifts",
     owner: "Mariana Z.",
     startDate: "2022-01-21T05:00:00.000Z",
@@ -199,6 +213,7 @@ export const allTasks: Task[] = [
     remainingSpend: 500,
   },
   {
+    id: 14,
     taskName: "Invitations Created",
     owner: "Neda B.",
     startDate: "2022-01-01T05:00:00.000Z",
