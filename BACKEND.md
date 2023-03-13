@@ -10,7 +10,7 @@ We are going to be taking the kanban portion of the grid-and-flexbox-workshop to
 git clone git@github.com:giantmachines/gm-kanban.git
 ```
 
-- Follow README.md instructions (`Prerequisites` and `Getting Started`) to stand up the backend server.
+- Follow README.md instructions for the `gm-kanban` repository (`Prerequisites` and `Getting Started`) to stand up the backend server.
 - Do a fresh npm install for this repository.
 
 ## Background
@@ -34,7 +34,7 @@ You are apart of a team that has been working on adding in a Kanban board featur
   - [] A logged in user should be able to create a column through the `CreateColumnModal`.
   - [] A logged in user should be able to create a card through the `CreateCardModal`.
   - [] A logged in user should be able to delete a column through the `KanbanView`'s ColumnHeader delete button.
-  - [] A logged in user should be able to create a card through the `Card` component.
+  - [] A logged in user should be able to delete a card through the `Card` component.
 - [] ★★★ Add in moving (updating) of columns and cards
   - [] A logged in user should be able to move a column (order should be preserved)
   - [] A logged in user should be able to move a card (order should be preserved)
