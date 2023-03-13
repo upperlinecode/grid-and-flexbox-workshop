@@ -39,7 +39,7 @@ export function useColumnDelete() {
   return useMutation({
     mutationFn: deleteColumn,
     onSuccess: (data) => {
-      queryClient.setQueriesData([COLUMN_KEY, data.boardId], (oldData: any) => [...oldData, data]);
+      queryClient.invalidateQueries([COLUMN_KEY, data.boardId]);
     },
   });
 }
